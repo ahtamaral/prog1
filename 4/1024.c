@@ -13,7 +13,7 @@ void encode(char * text)
     printf("read: %s length: %i  middle: %i\n", text, length, middle);
     #endif
 
-    for (int i = 0; i < length - 1; i++)
+    for (int i = 0; i < length; i++)
     {
         if ( (text[i] > 64 && text[i] < 91) ||
               (text[i] > 96 && text[i] < 123)  )
