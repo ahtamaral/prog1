@@ -15,42 +15,47 @@ int main()
     char bestPlanet [55];
     char delim[] = " ";
 
-    scanf("%i\n", &numberOfEntries);
+    numberOfEntries = 1;
 
-    for (int i = 0; i < numberOfEntries; i++)
+    while(numberOfEntries != 0)
     {
-        fgets(buffer, 2100, stdin);
-        textLen = strlen(buffer);
-        buffer[textLen-1] = '\0';
-        // printf("read: %s\n", buffer);
+        scanf("%i\n", &numberOfEntries);
+        /*printf("NE: %i\n", numberOfEntries);*/
 
-        // Parsing string.
-        char *ptr = strtok(buffer, delim);
-
-        int j = 0;
-        while (ptr != NULL)
+        int i;
+        for (i = 0; i < numberOfEntries; i++)
         {
-            // printf("'%s'\n", ptr);
-            if (j == 0) {strcpy(currentPlanet, ptr);}
-            if (j == 1) {strcpy(year, ptr);}
-            if (j == 2) {strcpy(yearsAgo, ptr);}
-            ptr = strtok(NULL, delim);
-            j++;
+
+            fgets(buffer, 100, stdin);
+            textLen = strlen(buffer);
+            buffer[textLen-1] = '\0';
+
+            char *ptr = strtok(buffer, delim);
+
+            int j = 0;
+            while (ptr != NULL)
+            {
+                if (j == 0) {strcpy(currentPlanet, ptr);}
+                if (j == 1) {strcpy(year, ptr);}
+                if (j == 2) {strcpy(yearsAgo, ptr);}
+                ptr = strtok(NULL, delim);
+                j++;
+            }
+
+            yearInt = atoi(year);
+            yearsAgoInt = atoi(yearsAgo);
+
+
+            if (yearInt - yearsAgoInt < oldestMessage)
+            {
+                oldestMessage = yearInt - yearsAgoInt;
+                strcpy(bestPlanet, currentPlanet);
+            }
         }
-
-        yearInt = atoi(year);
-        yearsAgoInt = atoi(yearsAgo);
-
-        // printf("%s %i %i\n", currentPlanet, yearInt, yearsAgoInt);
-
-        if (yearInt - yearsAgoInt < oldestMessage)
-        {
-            oldestMessage = yearInt - yearsAgoInt;
-            strcpy(bestPlanet, currentPlanet);
-        }
+        if (numberOfEntries != 0)
+            printf("%s\n", bestPlanet);
+        oldestMessage = 50000;
     }
-
-    printf("%s\n", bestPlanet);
 
 
     return 0;

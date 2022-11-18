@@ -8,14 +8,14 @@ int main()
     int feedback;
 
     scanf("%i", &numberOfEntries);
-    // printf("numberOfEntries: %i\n", numberOfEntries);
 
-    for (int i = 0; i < numberOfEntries; i++)
+    int i;
+    for (i = 0; i < numberOfEntries; i++)
     {
         scanf("%i", &numberOfFeedbacks);
-        // printf("numberOfFeedbacks: %i\n", numberOfFeedbacks);
-
-        for (int i = 0; i < numberOfFeedbacks; i++)
+        
+        int j;
+        for (j = 0; j < numberOfFeedbacks; j++)
         {
             scanf("%i", &feedback);
 

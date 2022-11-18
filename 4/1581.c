@@ -3,61 +3,68 @@
  
 int main() {
  
-    int numberOfEntries;
-    int numberOfPeople;
-    char buffer[21];
-    char lastBuffer[21];
-    int ret;
-    int willBeEnglish;
+    int numberOfPlayers;
+    int numberOfMatches;
+    char buffer[25];
+    char *goals[50];
+    int goalsInt;
+    int goodPlayer = 1;
+    int goodPlayers = 0;
+    int i;
 
-    lastBuffer[0] = 0;
-    willBeEnglish = 0;
+    fgets(buffer, 25, stdin);
+    buffer[strlen(buffer)-1] = '\0';
+    /*printf("%s\n", buffer);*/
 
-    scanf("%i", &numberOfEntries);
+    char *ptr = strtok(buffer, " ");
 
-    for (int i = 0; i < numberOfEntries; i++)
+    i = 0;
+    while (ptr != NULL)
     {
-        scanf("%i", &numberOfPeople);
-        
-        for (int i = 0; i < numberOfPeople; i++)
-        {
-            
-            scanf("%s", buffer);
-
-            // printf("%i\n", lastBuffer[0]);
-            if (lastBuffer[0] != 0)
-            {
-                ret = strcmp(buffer, lastBuffer);
-
-                if (ret == 0)
-                {
-                    // printf("EQUAL.\n");
-                }
-                else 
-                {
-                    // printf("DIFFERENT.\n");
-                    willBeEnglish = 1;
-                }
-            } 
-
-            strcpy(lastBuffer, buffer);
-
-        }
-
-        if (willBeEnglish)
-        {
-            printf("ingles\n");
-        } 
-        else 
-        {
-            printf("%s\n", buffer);
-        }
-
-        lastBuffer[0] = 0;
-        willBeEnglish = 0;
-
+        if (i == 0){numberOfPlayers = atoi(ptr);}
+        if (i == 1){numberOfMatches = atoi(ptr);}
+        ptr = strtok(NULL, " ");
+        i++;
     }
 
- 
+    /*printf("%i\n", numberOfMatches+numberOfPlayers);*/
+
+    int j, k;
+    for (j = 0; j < numberOfPlayers; j++)
+    {
+        goodPlayer = 1;
+        fgets(buffer, 25, stdin);
+        buffer[strlen(buffer)-1] = '\0';
+
+        char *ptr = strtok(buffer, " ");
+
+        int l = 0;
+        while (ptr != NULL)
+        {
+            goals[l] = ptr;
+            ptr = strtok(NULL, " ");
+            l++;
+        }
+
+        int p;
+        for (p = 0; p < l; p++)
+        {
+            if (atoi(goals[p]) == 0)
+                goodPlayer = 0;
+            /*printf("%i\n", atoi(goals[p]));*/
+        }
+        /*printf("\n");*/
+
+        if (goodPlayer)
+        {
+            /*printf("GOOD PLAYER\n");*/
+        }
+
+        goodPlayers += goodPlayer;
+
+        /*printf("%s\n", buffer);*/
+    }
+
+    printf("%i\n", goodPlayers);
     return 0;
 }
